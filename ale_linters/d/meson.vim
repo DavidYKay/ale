@@ -2,7 +2,7 @@
 " Description: "meson for D files, via Meson"
 
 function! ale_linters#d#meson#MesonCommand(buffer) abort
-    return "meson introspect --target-files d@@gc@exe /home/dk/workspace/current/mccarthy/build"
+    return "meson introspect --target-files d@@main@exe /home/dk/workspace/current/mccarthy/build"
 endfunction
 
 function! ale_linters#d#meson#ProjectRoot(buffer) abort
@@ -27,7 +27,8 @@ function! ale_linters#d#meson#DMDCommand(buffer, meson_output) abort
     endif
   endfor
   
-  return 'dmd '. join(keys(l:dir_dict)) . ' -o- -wi -vcolumns -c %t'
+  "return 'dmd '. join(keys(l:dir_dict)) . ' -o- -wi -vcolumns -c %t'
+  return 'dmd '.  "-I/home/dk/workspace/current/mccarthy/d" . ' -o- -wi -vcolumns -c %t'
 endfunction
 
 function! ale_linters#d#meson#Handle(buffer, lines) abort
